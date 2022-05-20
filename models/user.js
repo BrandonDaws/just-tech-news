@@ -27,13 +27,27 @@ User.init(
     //define email column 
     email: {
         type: DataTypes.STRING,
+        // no empty values
         allowNull: false,
-        validate: {
-            //this means the password must be at least four characters long
-            len: [4]
+
+        //cannot be any duplicate emails on file
+        unique: true,
+
+        //if allownull is false we can run the datat through validators 
+        validate:{
+          isEmail: true
         }
-    }
-},
+        },
+        //define a password column
+        password: {
+          type: DataTypes.STRING,
+          allowNull: false,
+          validate:{
+            //password must eb atleast 4 chars
+            len:[4]
+          }
+        }
+    },
 
   {
     // TABLE CONFIGURATION OPTIONS GO HERE (https://sequelize.org/v5/manual/models-definition.html#configuration))
