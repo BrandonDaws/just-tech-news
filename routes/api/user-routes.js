@@ -69,6 +69,13 @@ User.findOne({
     return;
   }
 
+  const validPassword = dbUserData.checkPassword(req.body.password);
+
+  if(!validPassword){
+    res.status(400).json({message: "incorrect password"});
+    return;
+  }
+res.json({User: dbUserData, message: 'You are now logged in!'});
  // res.json({ user: dbUserData });
 
   // Verify user
